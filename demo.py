@@ -4,22 +4,18 @@ import random
 import plotly.graph_objects as go
 from scipy.spatial import Delaunay
 
+# === Set page config ===
 st.set_page_config(layout="wide")
 
-# Custom styling for padding and compact layout
+# === Custom global CSS to normalize zoom across browsers ===
 st.markdown("""
     <style>
-    .block-container {
-        padding-top: 0.5rem !important;
-    }
-    header, footer {
-        visibility: hidden;
-    }
-    .stNumberInput>div>input {
-        max-width: 80px;
+    html, body, [data-testid="stAppViewContainer"] {
+        zoom: 1 !important;
     }
     </style>
 """, unsafe_allow_html=True)
+
 
 # === Initialize session state ===
 if 'positions' not in st.session_state:
@@ -164,8 +160,8 @@ if run_button and st.session_state.positions is not None:
     I2 = np.eye(2)
     for k, tree in enumerate(trees):
         L_k, eta_k = np.zeros((N*2, N*2)), np.zeros(N*2)
-        L_k[0:2, 0:2] += I2 * 1e7
-        eta_k[0:2] += I2 @ positions[0] * 1e7
+        L_k[0:2, 0:2] += I2 * 1e6
+        eta_k[0:2] += I2 @ positions[0] * 1e6
         for (i, j) in tree:
             mu, w = mu_ij_dict[(i, j)], scaled_weights[(i, j)]
             idx_i, idx_j = slice(2*i, 2*i+2), slice(2*j, 2*j+2)
@@ -190,7 +186,7 @@ if st.session_state.x_opt is not None:
 
     fig = go.Figure()
     fig.update_layout(
-        font=dict(size=14), height=700,
+        font=dict(size=14), autosize=True,
         margin=dict(t=10, b=10, l=10, r=10),
         xaxis=dict(scaleanchor='y', showgrid=False),
         yaxis=dict(showgrid=False),
