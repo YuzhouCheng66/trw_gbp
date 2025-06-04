@@ -48,12 +48,11 @@ streamlit run demo.py
   and edges (gray lines).
 - **Bottom Plot**: Convergence plot of TRW-GBP vs. Full L2 error as tree count increases.
 
+---
+
 ## 💡 Notes
 
 - TRW-GBP converges to full-batch as number of trees → ∞.
 - Tree samples and noise injection are repeatable if seed is fixed.
 - See `requirements.txt` for full list (Streamlit, NumPy, Plotly, SciPy).
 ---
-
-
-Have fun! 
