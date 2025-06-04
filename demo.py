@@ -38,7 +38,7 @@ reconstruct_button = st.sidebar.button("Reconstruct")
 
 # === Sidebar: Optimization Settings ===
 st.sidebar.header("Optimization Settings")
-num_trees = st.sidebar.slider("Number of Spanning Trees", 1, 500, 100, step=1)
+num_trees = st.sidebar.slider("Number of Spanning Trees", 2, 500, 100, step=1)
 run_button = st.sidebar.button("Run Optimization")
 show_gt = st.sidebar.checkbox("Show Ground Truth", value=True)
 show_full = st.sidebar.checkbox("Show Full Optimization", value=True)
