@@ -57,4 +57,3 @@ streamlit run demo.py
 - TRW-GBP converges to full-batch as number of trees → ∞.
 - Tree samples and noise injection are repeatable if seed is fixed.
 - See `requirements.txt` for full list (Streamlit, NumPy, Plotly, SciPy).
----
