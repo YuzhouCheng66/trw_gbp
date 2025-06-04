@@ -4,6 +4,7 @@ An interactive demo to visualize **Tree-Reweighted Gaussian Belief Propagation (
 It accelerates and converges to standard GBP by averaging GBP beliefs on spanning trees.
 
 👉 **Try it instantly:** [trwgbp.streamlit.app](https://trwgbp.streamlit.app)
+
 ---
 
 ## ⚙️ Installation
