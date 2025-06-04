@@ -42,9 +42,9 @@ streamlit run demo.py
 ## 📊 Visualization
 
 - **Top Graph**: Shows GT (black ●), 
-  Full (blue x), 
+  Full (blue **x**), 
   Anchor node (red ●), 
-  TRW-GBP (green x), 
+  TRW-GBP (green **x**), 
   and edges (gray lines).
 - **Bottom Plot**: Convergence plot of TRW-GBP vs. Full L2 error as tree count increases.
 
