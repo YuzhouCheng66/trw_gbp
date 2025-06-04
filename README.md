@@ -1,7 +1,7 @@
 # 🌲 TRW-GBP Pose Graph Optimizer
 
 An interactive demo to visualize **Tree-Reweighted Gaussian Belief Propagation (TRW-GBP)** on 2D pose graphs.
-It accelerates and converges to standard GBP by averaging spanning tree GBP beliefs.
+It accelerates and converges to standard GBP by averaging GBP beliefs on spanning trees.
 
 ---
 
@@ -26,13 +26,12 @@ streamlit run demo.py
 
 ### Optimization Settings
 - **Number of Spanning Trees**: Choose how many random spanning trees to generate for TRW-GBP.
-- **Run Optimization**: Starts tree sampling, GBP solving, and TRW averaging.
+- **Run Optimization**: Starts tree sampling, tree GBP solving, and TRW averaging.
 
 ### Display Options
 - **Show Ground Truth**: Display true 2D positions.
-- **Show Full Optimization**: Display solution from full information matrix.
-- **Show Tree**: Toggle a specific tree's optimization result.
-  - **Tree Index**: Choose which sampled tree to display.
+- **Show Full Optimization**: Display solution from an information matrix.
+- **Show Tree**: Toggle a specific tree's GBP result.
 
 ### TRW-GBP Tree Count
 - Adjust the number of trees used in the TRW-GBP average.
@@ -42,10 +41,13 @@ streamlit run demo.py
 
 ## 📊 Visualization
 
-- **Top Graph**: Shows GT (●), Full (❌), Anchor (🔴), TRW estimate (✳️), and edges (gray lines).
+- **Top Graph**: Shows 
+  <span style="color:black"><b>GT</b> (●)</span>, 
+  <span style="color:blue"><b>Full</b> (x)</span>, 
+  <span style="color:red"><b>Anchor</b> (●)</span>, 
+  <span style="color:green"><b>TRW estimate</b> (x)</span>, 
+  and edges (gray lines).
 - **Bottom Plot**: Convergence plot of TRW-GBP vs. Full L2 error as tree count increases.
-
----
 
 ## 💡 Notes
 
