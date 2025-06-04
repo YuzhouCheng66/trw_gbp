@@ -4,18 +4,22 @@ import random
 import plotly.graph_objects as go
 from scipy.spatial import Delaunay
 
-# === Set page config ===
 st.set_page_config(layout="wide")
 
-# === Custom global CSS to normalize zoom across browsers ===
+# Custom styling for padding and compact layout
 st.markdown("""
     <style>
-    html, body, [data-testid="stAppViewContainer"] {
-        zoom: 1 !important;
+    .block-container {
+        padding-top: 0rem !important;
+    }
+    header, footer {
+        visibility: hidden;
+    }
+    .stNumberInput>div>input {
+        max-width: 90px;
     }
     </style>
 """, unsafe_allow_html=True)
-
 
 # === Initialize session state ===
 if 'positions' not in st.session_state:
