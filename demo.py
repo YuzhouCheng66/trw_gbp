@@ -16,7 +16,7 @@ st.markdown("""
         visibility: hidden;
     }
     .stNumberInput>div>input {
-        max-width: 90px;
+        max-width: 80px;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -164,8 +164,8 @@ if run_button and st.session_state.positions is not None:
     I2 = np.eye(2)
     for k, tree in enumerate(trees):
         L_k, eta_k = np.zeros((N*2, N*2)), np.zeros(N*2)
-        L_k[0:2, 0:2] += I2 * 1e6
-        eta_k[0:2] += I2 @ positions[0] * 1e6
+        L_k[0:2, 0:2] += I2 * 1e7
+        eta_k[0:2] += I2 @ positions[0] * 1e7
         for (i, j) in tree:
             mu, w = mu_ij_dict[(i, j)], scaled_weights[(i, j)]
             idx_i, idx_j = slice(2*i, 2*i+2), slice(2*j, 2*j+2)
@@ -190,7 +190,7 @@ if st.session_state.x_opt is not None:
 
     fig = go.Figure()
     fig.update_layout(
-        font=dict(size=14), height=800,
+        font=dict(size=14), height=700,
         margin=dict(t=10, b=10, l=10, r=10),
         xaxis=dict(scaleanchor='y', showgrid=False),
         yaxis=dict(showgrid=False),
