@@ -16,7 +16,7 @@ streamlit run demo.py
 
 ---
 
-## 🧭 UI Overview
+## 🔢 UI Overview
 
 ### Construction Settings
 - **Random Seed**: Set a seed to ensure reproducible graphs.
