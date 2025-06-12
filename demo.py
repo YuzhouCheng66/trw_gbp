@@ -68,10 +68,15 @@ if reconstruct_button or st.session_state.positions is None:
     Lambda[0:2, 0:2] += np.eye(2) * 1e7
     eta[0:2] += np.eye(2) @ positions[0] * 1e7
 
+
+    mu_ij_dict = {}
     for (i, j) in edges:
         mu_ij = positions[j] - positions[i]
         noise = np.random.randn(2) * odom_noise_std
         mu_ij_noisy = mu_ij + noise
+        mu_ij_dict[(i, j)] = mu_ij_noisy
+        mu_ij_dict[(j, i)] = -mu_ij_noisy
+
         Omega = np.eye(2)
         J_i, J_j = -np.eye(2), np.eye(2)
         idx_i, idx_j = slice(2*i, 2*i+2), slice(2*j, 2*j+2)
@@ -115,9 +120,12 @@ if reconstruct_button or st.session_state.positions is None:
     st.session_state.x_opt = x_opt
     st.session_state.x_trees = None
     st.session_state.static_traces = static_traces
+    st.session_state.mu_ij_dict = mu_ij_dict
+
 
 # === Run Optimization ===
 if run_button and st.session_state.positions is not None:
+    mu_ij_dict = st.session_state.mu_ij_dict
     positions = st.session_state.positions
     edges = st.session_state.edges
     x_opt = st.session_state.x_opt
@@ -147,18 +155,22 @@ if run_button and st.session_state.positions is not None:
 
     edge_count = {e: 0 for e in edges}
     trees = [sample_tree(adj_list) for _ in range(num_trees)]
+
+    # test whether there are repeated trees
+    # print(len(set(tuple(sorted(tree)) for tree in trees)))
+
     for tree in trees:
         for e in tree:
             edge_count[e] += 1
 
     rho_ij = {e: edge_count[e]/num_trees for e in edges}
-    mu_ij_dict, scaled_weights = {}, {}
+    scaled_weights = {}
+
+
     for (i, j) in edges:
-        mu = positions[j] - positions[i] + np.random.randn(2) * odom_noise_std
-        mu_ij_dict[(i, j)] = mu
-        mu_ij_dict[(j, i)] = -mu
         w = 1.0 / (rho_ij[(i, j)] if rho_ij[(i, j)] > 0 else 1e-6)
-        scaled_weights[(i, j)] = scaled_weights[(j, i)] = w
+        scaled_weights[(i, j)] = w 
+        scaled_weights[(j, i)] = w
 
     x_trees = np.zeros((num_trees, N, 2))
     I2 = np.eye(2)
